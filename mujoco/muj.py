@@ -1,15 +1,10 @@
 import time
 from pathlib import Path
-
 import mujoco
 import mujoco.viewer
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation, PillowWriter
-
-# ============================================================
-# Math utilities
-# ============================================================
 
 def wrap_angle(a):
     return (a + np.pi) % (2 * np.pi) - np.pi
@@ -52,11 +47,6 @@ def simulate_ground_truth_noiseless(q0, N, dt, u):
         q = step_unicycle(q, u, dt)
         q_hist[k] = q
     return q_hist
-
-
-# ============================================================
-# EKF-SLAM (same logic as your old Python simulation)
-# ============================================================
 
 class EKFSLAM:
     def __init__(self, R_motion, Q_meas, dt, n_landmarks, q0):
@@ -197,10 +187,6 @@ def simulate_slam(q0, N, dt, u, landmarks, R_motion, Q_meas,
     return q_true, mu_hist, observed_hist
 
 
-# ============================================================
-# Scene generation using your cube XML logic
-# ============================================================
-
 def cube_xml_from_landmarks(landmarks, cube_half_sizes=None):
     """
     Uses your old obstacle logic:
@@ -260,10 +246,6 @@ def build_scene_from_landmarks(scene_template_path, generated_scene_path, landma
     print(f"Generated scene saved to: {generated_scene_path}")
     return cube_half_sizes
 
-
-# ============================================================
-# MuJoCo helpers
-# ============================================================
 
 def yaw_to_quat(th):
     return np.array([np.cos(th / 2), 0.0, 0.0, np.sin(th / 2)])
@@ -393,9 +375,6 @@ def update_live_plot(plotters, q_true_hist, mu_hist, q_gt_hist, observed_hist, k
     fig.canvas.draw_idle()
     fig.canvas.flush_events()
     plt.pause(0.001)
-# ============================================================
-# Main
-# ============================================================
 
 def main():
     dt = 0.05
