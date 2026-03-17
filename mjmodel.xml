@@ -1,0 +1,146 @@
+<mujoco model="TB3-WafflePi scene">
+  <compiler angle="radian" meshdir="assets/"/>
+
+  <option impratio="10" cone="elliptic"/>
+
+  <visual>
+    <global azimuth="120" elevation="-20"/>
+    <headlight ambient="0.3 0.3 0.3" diffuse="0.6 0.6 0.6" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+  </visual>
+
+  <statistic extent="6" center="0 0 0.4"/>
+
+  <default>
+    <default class="wheel">
+      <joint limited="false" armature="0.01" frictionloss="0.1"/>
+      <general ctrllimited="true" ctrlrange="-7.88 7.88" biastype="affine" gainprm="0.1" biasprm="0 0 -0.1"/>
+      <default class="wheel_left"/>
+      <default class="wheel_right"/>
+    </default>
+    <default class="visual">
+      <geom type="mesh" contype="0" conaffinity="0" group="2" density="0"/>
+    </default>
+    <default class="collision">
+      <geom type="mesh" group="3"/>
+    </default>
+  </default>
+
+  <asset>
+    <texture type="skybox" colorspace="auto" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072"/>
+    <texture type="2d" colorspace="auto" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300"/>
+    <material name="grey" rgba="0.3 0.3 0.3 1"/>
+    <material name="black" rgba="0.1 0.1 0.1 1"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+    <material name="ekf_lm_mat" rgba="0.8 0 0.9 1"/>
+    <material name="true_robot_mat" rgba="0 0 1 1"/>
+    <material name="ekf_robot_mat" rgba="0.8 0 0.9 1"/>
+    <material name="gt_robot_mat" rgba="0.85 0.85 0.85 1"/>
+    <material name="fov_mat" rgba="0 1 0 0.6"/>
+    <mesh name="waffle_pi_base" content_type="model/stl" file="waffle_pi_base.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="left_tire" content_type="model/stl" file="left_tire.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="right_tire" content_type="model/stl" file="right_tire.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="lds" content_type="model/stl" file="lds.stl" scale="0.001 0.001 0.001"/>
+  </asset>
+
+  <worldbody>
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
+    <light pos="0 0 1.5" dir="0 0 -1" type="directional"/>
+    <body name="base">
+      <inertial pos="-0.064 0 0.06" mass="1.8" diaginertia="0.01 0.01 0.008"/>
+      <joint name="base_joint" type="free"/>
+      <geom class="visual" pos="-0.064 0 0.01" quat="1 0 0 0" material="black" mesh="waffle_pi_base"/>
+      <geom class="collision" pos="-0.064 0 0.01" quat="1 0 0 0" mesh="waffle_pi_base"/>
+      <geom size="0.005" pos="-0.177 -0.064 0.005" condim="1" friction="0.0001 0.0001" solimp="0.95 0.99" material="grey"/>
+      <geom size="0.005" pos="-0.177 0.064 0.005" condim="1" friction="0.0001 0.0001" solimp="0.95 0.99" material="grey"/>
+      <geom class="visual" pos="-0.049 0 0.1255" quat="1 0 0 0" material="black" mesh="lds"/>
+      <geom class="collision" pos="-0.049 0 0.1255" quat="1 0 0 0" mesh="lds"/>
+      <geom size="0.0075 0.015 0.0135" pos="0.078 0 0.107" type="box" material="grey"/>
+      <body name="wheel_left" pos="0 0.144 0.033" quat="0.707388 -0.706825 0 0">
+        <inertial pos="0 0 0" quat="-0.000890159 0.706886 0.000889646 0.707326" mass="0.0284989" diaginertia="2.07126e-05 1.11924e-05 1.11756e-05"/>
+        <joint name="wheel_left" class="wheel_left" pos="0 0 0" axis="0 0 1"/>
+        <geom class="visual" quat="0.707388 0.706825 0 0" material="grey" mesh="left_tire"/>
+        <geom class="collision" quat="0.707388 0.706825 0 0" mesh="left_tire"/>
+      </body>
+      <body name="wheel_right" pos="0 -0.144 0.033" quat="0.707388 -0.706825 0 0">
+        <inertial pos="0 0 0" quat="-0.000890159 0.706886 0.000889646 0.707326" mass="0.0284989" diaginertia="2.07126e-05 1.11924e-05 1.11756e-05"/>
+        <joint name="wheel_right" class="wheel_right" pos="0 0 0" axis="0 0 1"/>
+        <geom class="visual" quat="0.707388 0.706825 0 0" material="grey" mesh="right_tire"/>
+        <geom class="collision" quat="0.707388 0.706825 0 0" mesh="right_tire"/>
+      </body>
+    </body>
+    <body name="obstacle_0" pos="3.82 1.134 0.142">
+      <geom size="0.188 0.125 0.142" type="box" rgba="0.2 0.2 0.8 1"/>
+    </body>
+    <body name="obstacle_1" pos="2.448 4.044 0.201">
+      <geom size="0.138 0.138 0.201" type="box" rgba="0.2 0.2 0.8 1"/>
+    </body>
+    <body name="obstacle_2" pos="-1.813 -1.239 0.202">
+      <geom size="0.212 0.148 0.202" type="box" rgba="0.2 0.2 0.8 1"/>
+    </body>
+    <body name="obstacle_3" pos="2.402 -1.332 0.144">
+      <geom size="0.209 0.171 0.144" type="box" rgba="0.2 0.2 0.8 1"/>
+    </body>
+    <body name="obstacle_4" pos="-3.252 -3.632 0.194">
+      <geom size="0.202 0.141 0.194" type="box" rgba="0.2 0.2 0.8 1"/>
+    </body>
+    <body name="obstacle_5" pos="-1.351 2.064 0.143">
+      <geom size="0.183 0.213 0.143" type="box" rgba="0.2 0.2 0.8 1"/>
+    </body>
+    <body name="obstacle_6" pos="-0.816 -4.38 0.143">
+      <geom size="0.2 0.172 0.143" type="box" rgba="0.2 0.2 0.8 1"/>
+    </body>
+    <body name="obstacle_7" pos="1.434 -4.412 0.178">
+      <geom size="0.137 0.17 0.178" type="box" rgba="0.2 0.2 0.8 1"/>
+    </body>
+    <body name="est_landmark_0" pos="1000 1000 0.45" mocap="true">
+      <geom size="0.09" contype="0" conaffinity="0" material="ekf_lm_mat"/>
+    </body>
+    <body name="est_landmark_1" pos="1000 1000 0.45" mocap="true">
+      <geom size="0.09" contype="0" conaffinity="0" material="ekf_lm_mat"/>
+    </body>
+    <body name="est_landmark_2" pos="1000 1000 0.45" mocap="true">
+      <geom size="0.09" contype="0" conaffinity="0" material="ekf_lm_mat"/>
+    </body>
+    <body name="est_landmark_3" pos="1000 1000 0.45" mocap="true">
+      <geom size="0.09" contype="0" conaffinity="0" material="ekf_lm_mat"/>
+    </body>
+    <body name="est_landmark_4" pos="1000 1000 0.45" mocap="true">
+      <geom size="0.09" contype="0" conaffinity="0" material="ekf_lm_mat"/>
+    </body>
+    <body name="est_landmark_5" pos="1000 1000 0.45" mocap="true">
+      <geom size="0.09" contype="0" conaffinity="0" material="ekf_lm_mat"/>
+    </body>
+    <body name="est_landmark_6" pos="1000 1000 0.45" mocap="true">
+      <geom size="0.09" contype="0" conaffinity="0" material="ekf_lm_mat"/>
+    </body>
+    <body name="est_landmark_7" pos="1000 1000 0.45" mocap="true">
+      <geom size="0.09" contype="0" conaffinity="0" material="ekf_lm_mat"/>
+    </body>
+    <body name="true_robot_marker" pos="0 0 0.08" mocap="true">
+      <geom size="0.07" contype="0" conaffinity="0" material="true_robot_mat"/>
+    </body>
+    <body name="ekf_robot_marker" pos="0 0 0.1" mocap="true">
+      <geom size="0.06" contype="0" conaffinity="0" material="ekf_robot_mat"/>
+    </body>
+    <body name="gt_robot_marker" pos="0 0 0.12" mocap="true">
+      <geom size="0.05" contype="0" conaffinity="0" material="gt_robot_mat"/>
+    </body>
+    <body name="fov_left_marker" pos="0 0 0.04" mocap="true">
+      <geom size="0.04" contype="0" conaffinity="0" material="fov_mat"/>
+    </body>
+    <body name="fov_right_marker" pos="0 0 0.04" mocap="true">
+      <geom size="0.04" contype="0" conaffinity="0" material="fov_mat"/>
+    </body>
+  </worldbody>
+
+  <contact>
+    <exclude body1="base" body2="wheel_left"/>
+    <exclude body1="base" body2="wheel_right"/>
+  </contact>
+
+  <actuator>
+    <general name="wheel_left" class="wheel_left" joint="wheel_left"/>
+    <general name="wheel_right" class="wheel_right" joint="wheel_right"/>
+  </actuator>
+</mujoco>

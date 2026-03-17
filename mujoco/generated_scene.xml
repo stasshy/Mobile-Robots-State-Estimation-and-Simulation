@@ -30,35 +30,35 @@
     <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
 
     
-    <body name="obstacle_0" pos="-3.265 3.662 0.142">
+    <body name="obstacle_0" pos="2.745 2.771 0.142">
       <geom type="box" size="0.188 0.125 0.142" rgba="0.2 0.2 0.8 1"/>
     </body>
 
-    <body name="obstacle_1" pos="-3.601 1.335 0.201">
+    <body name="obstacle_1" pos="0.138 -1.928 0.201">
       <geom type="box" size="0.138 0.138 0.201" rgba="0.2 0.2 0.8 1"/>
     </body>
 
-    <body name="obstacle_2" pos="0.044 -1.313 0.202">
+    <body name="obstacle_2" pos="-4.015 -1.050 0.202">
       <geom type="box" size="0.212 0.148 0.202" rgba="0.2 0.2 0.8 1"/>
     </body>
 
-    <body name="obstacle_3" pos="1.139 3.630 0.144">
+    <body name="obstacle_3" pos="-0.824 -4.093 0.144">
       <geom type="box" size="0.209 0.171 0.144" rgba="0.2 0.2 0.8 1"/>
     </body>
 
-    <body name="obstacle_4" pos="-4.236 -4.386 0.194">
+    <body name="obstacle_4" pos="-4.061 4.493 0.194">
       <geom type="box" size="0.202 0.141 0.194" rgba="0.2 0.2 0.8 1"/>
     </body>
 
-    <body name="obstacle_5" pos="3.322 3.367 0.143">
+    <body name="obstacle_5" pos="-0.585 4.268 0.143">
       <geom type="box" size="0.183 0.213 0.143" rgba="0.2 0.2 0.8 1"/>
     </body>
 
-    <body name="obstacle_6" pos="-0.533 0.649 0.143">
+    <body name="obstacle_6" pos="-0.968 -0.063 0.143">
       <geom type="box" size="0.200 0.172 0.143" rgba="0.2 0.2 0.8 1"/>
     </body>
 
-    <body name="obstacle_7" pos="3.735 -1.432 0.178">
+    <body name="obstacle_7" pos="1.590 -3.953 0.178">
       <geom type="box" size="0.137 0.170 0.178" rgba="0.2 0.2 0.8 1"/>
     </body>
 
@@ -93,6 +93,20 @@
     <body name="est_landmark_7" mocap="true" pos="1000 1000 0.45">
       <geom type="sphere" size="0.09" material="ekf_lm_mat" contype="0" conaffinity="0"/>
     </body>
+
+    <body name="wall_bottom" pos="0.000 -5.000 0.350">
+      <geom type="box" size="5.000 0.060 0.350" rgba="0.8 0.2 0.2 1"/>
+    </body>
+    <body name="wall_top" pos="0.000 5.000 0.350">
+      <geom type="box" size="5.000 0.060 0.350" rgba="0.8 0.2 0.2 1"/>
+    </body>
+    <body name="wall_left" pos="-5.000 0.000 0.350">
+      <geom type="box" size="0.060 5.000 0.350" rgba="0.8 0.2 0.2 1"/>
+    </body>
+    <body name="wall_right" pos="5.000 0.000 0.350">
+      <geom type="box" size="0.060 5.000 0.350" rgba="0.8 0.2 0.2 1"/>
+    </body>
+    
     <!-- EST_LANDMARKS_GO_HERE -->
 
     <body name="true_robot_marker" mocap="true" pos="0 0 0.08">
