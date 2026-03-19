@@ -117,6 +117,8 @@ Using nonlinear models and EKF linearization.
 
 The most complete part of the project.
 
+<img width="2876" height="1704" alt="image" src="https://github.com/user-attachments/assets/17d03ca8-6946-46c5-aedd-180be575379a" />
+
 It integrates:
 
 - differential-drive robot control  
