@@ -29,35 +29,35 @@
     <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
 
     
-    <body name="obstacle_0" pos="-4.444 2.796 0.142">
+    <body name="obstacle_0" pos="-3.353 1.995 0.142">
       <geom type="box" size="0.188 0.125 0.142" rgba="0.2 0.2 0.8 1"/>
     </body>
 
-    <body name="obstacle_1" pos="-2.814 -1.521 0.201">
+    <body name="obstacle_1" pos="3.835 0.340 0.201">
       <geom type="box" size="0.138 0.138 0.201" rgba="0.2 0.2 0.8 1"/>
     </body>
 
-    <body name="obstacle_2" pos="-0.796 3.493 0.202">
+    <body name="obstacle_2" pos="1.997 -2.082 0.202">
       <geom type="box" size="0.212 0.148 0.202" rgba="0.2 0.2 0.8 1"/>
     </body>
 
-    <body name="obstacle_3" pos="3.319 -0.443 0.144">
+    <body name="obstacle_3" pos="1.087 3.120 0.144">
       <geom type="box" size="0.209 0.171 0.144" rgba="0.2 0.2 0.8 1"/>
     </body>
 
-    <body name="obstacle_4" pos="2.394 -4.304 0.194">
+    <body name="obstacle_4" pos="-2.811 -3.379 0.194">
       <geom type="box" size="0.202 0.141 0.194" rgba="0.2 0.2 0.8 1"/>
     </body>
 
-    <body name="obstacle_5" pos="4.203 -3.080 0.143">
+    <body name="obstacle_5" pos="0.343 -0.511 0.143">
       <geom type="box" size="0.183 0.213 0.143" rgba="0.2 0.2 0.8 1"/>
     </body>
 
-    <body name="obstacle_6" pos="-1.761 -3.247 0.143">
+    <body name="obstacle_6" pos="-0.717 -4.461 0.143">
       <geom type="box" size="0.200 0.172 0.143" rgba="0.2 0.2 0.8 1"/>
     </body>
 
-    <body name="obstacle_7" pos="-2.196 1.464 0.178">
+    <body name="obstacle_7" pos="-0.850 3.664 0.178">
       <geom type="box" size="0.137 0.170 0.178" rgba="0.2 0.2 0.8 1"/>
     </body>
 

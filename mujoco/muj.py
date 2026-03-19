@@ -192,24 +192,14 @@ class EKFSLAM:
     def lm_idx(self, j):
         return 3 + 2 * j
 
-    def predict(self, u_lr):
-        vl, vr = u_lr
-        x, y, th = self.mu[0, 0], self.mu[1, 0], self.mu[2, 0]
+    def predict(self, delta):
+        dx, dy, dth = delta
 
-        dsl = vl * self.dt
-        dsr = vr * self.dt
-
-        ds = 0.5 * (dsr + dsl)
-        dth = (dsr - dsl) / self.wheel_base
-        th_mid = th + 0.5 * dth
-
-        self.mu[0, 0] = x + ds * np.cos(th_mid)
-        self.mu[1, 0] = y + ds * np.sin(th_mid)
-        self.mu[2, 0] = wrap_angle(th + dth)
+        self.mu[0, 0] = self.mu[0, 0] + dx
+        self.mu[1, 0] = self.mu[1, 0] + dy
+        self.mu[2, 0] = wrap_angle(self.mu[2, 0] + dth)
 
         G = np.eye(self.n)
-        G[0, 2] = -ds * np.sin(th_mid)
-        G[1, 2] =  ds * np.cos(th_mid)
 
         R_full = np.zeros((self.n, self.n))
         R_full[:3, :3] = self.R
@@ -264,8 +254,8 @@ class EKFSLAM:
         I = np.eye(self.n)
         self.Sigma = (I - K @ H) @ self.Sigma @ (I - K @ H).T + K @ self.Q @ K.T
 
-    def step(self, u_lr, measurements):
-        self.predict(u_lr)
+    def step(self, delta, measurements):
+        self.predict(delta)
 
         mu_pred = self.mu.copy()
         Sigma_pred = self.Sigma.copy()
@@ -613,7 +603,7 @@ def main():
                 fov_deg=fov_deg, max_range=max_range
             )
 
-            mu_pred, Sigma_pred = ekf.step(u_lr, measurements)
+            mu_pred, Sigma_pred = ekf.step(delta_gt, measurements)
 
             q_gt_hist[k + 1] = q_gt
             q_true_hist[k + 1] = q_true

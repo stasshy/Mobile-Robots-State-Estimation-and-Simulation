@@ -7,10 +7,10 @@
     <material name="grey" rgba="0.3 0.3 0.3 1"/>
     <material name="black" rgba="0.1 0.1 0.1 1"/>
 
-    <mesh name="waffle_pi_base" file="waffle_pi_base.stl" scale="0.001 0.001 0.001"/>
-    <mesh name="left_tire" file="left_tire.stl" scale="0.001 0.001 0.001"/>
-    <mesh name="right_tire" file="right_tire.stl" scale="0.001 0.001 0.001"/>
-    <mesh name="lds" file="lds.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="waffle_pi_base" file="../assets/waffle_pi_base.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="left_tire" file="../assets/left_tire.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="right_tire" file="../assets/right_tire.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="lds" file="../assets/lds.stl" scale="0.001 0.001 0.001"/>
   </asset>
 
   <default>
