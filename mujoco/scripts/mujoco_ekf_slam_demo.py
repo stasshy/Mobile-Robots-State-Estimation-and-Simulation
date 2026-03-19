@@ -491,7 +491,7 @@ def main():
         min_dist=2.0
     )
 
-    base = Path(__file__).resolve().parent
+    base = Path(__file__).resolve().parent.parent
     template = base / "models" / "TB3-WafflePi scene.xml"
     scene = base / "models" / "generated_scene.xml"
     build_scene(template, scene, landmarks, bounds)
